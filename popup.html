@@ -1,10 +1,27 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happiness Jar</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
   <body>
     <h2>Happiness Jar</h2>
 
     <!--Inspirational Quote Section-->
     <button id="quoteButton">Get an Inspirational Quote</button>
     <div id="quoteDisplay"></div>
+
+    <!--Positive Note Section-->
+    <textarea
+      id="positiveNote"
+      placeholder="Write a positive reminder for today!"
+    ></textarea>
+    <button id="saveNoteBtn">Save Note</button>
+    <!--Display Saved Notes-->
+    <button id="retrieveBtn">Retrieve Happiness</button>
+    <div id="displayNote"></div>
 
     <script src="popup.js"></script>
   </body>
