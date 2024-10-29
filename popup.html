@@ -7,27 +7,28 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h2>Happiness Jar</h2>
+    <div id="container">
+      <h2>Happiness Jar</h2>
 
-    <!--Inspirational Quote Section-->
-    <button id="quoteButton">Get an Inspirational Quote</button>
-    <div id="quoteDisplay"></div>
+      <!--Inspirational Quote Section-->
+      <button id="quoteButton">Get an Inspirational Quote</button>
+      <div id="quoteDisplay"></div>
 
-    <!--Positive Note Section-->
-    <textarea
-      id="positiveNote"
-      placeholder="Write a positive reminder for today!"
-    ></textarea>
-    <button id="saveNoteBtn">Save Note</button>
+      <!--Positive Note Section-->
+      <textarea
+        id="positiveNote"
+        placeholder="Write a positive reminder for today!"
+      ></textarea>
+      <button id="saveNoteBtn">Save Note</button>
 
-    <!--Display Saved Note Section-->
-    <button id="retrieveBtn">Retrieve Happiness</button>
-    <div id="displayNote"></div>
+      <!--Display Saved Note Section-->
+      <button id="retrieveBtn">Retrieve Happiness</button>
+      <div id="displayNote"></div>
 
-    <!--Display All Notes Section-->
-    <button id="retrieveAllBtn">Retrieve All Notes</button>
-    <div id="allNotesContainer" style="display: none"></div>
-
+      <!--Display All Notes Section-->
+      <button id="retrieveAllBtn">Retrieve All Notes</button>
+      <div id="allNotesContainer" style="display: none"></div>
+    </div>
     <script src="popup.js"></script>
   </body>
 </html>
