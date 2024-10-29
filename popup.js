@@ -7,7 +7,7 @@
 // get cute random dog photo?
 // way to delete notes?
 
-fetch a random quote from ZenQuotes API
+// fetch a random quote from ZenQuotes API
 function fetchRandomQuote() {
   fetch('https://zenquotes.io/api/random/1f1582443228bab0eb6b2bc00b9d629a')
     .then((response) => {
