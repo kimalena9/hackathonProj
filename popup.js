@@ -7,7 +7,7 @@
 // get cute random dog photo?
 // way to delete notes?
 
-// fetch a random quote from ZenQuotes API
+fetch a random quote from ZenQuotes API
 function fetchRandomQuote() {
   fetch('https://zenquotes.io/api/random/1f1582443228bab0eb6b2bc00b9d629a')
     .then((response) => {
@@ -66,18 +66,17 @@ async function retrieveNote() {
     quoteDisplay.style.display = 'block';
   }
 }
+// retrieve existing notes from Chrome storage
+// storage API requires that data be stored and retrieved as an object
+// chrome.storage.sync.get:
+//  -async method for getting data from Chrome sync storage
+//  -parameter/arg: key(s): object with key(s) to retrieve ({positiveNotes: []})
+//  []-> defaults to empty array if no key/value pairs exist
 
+// await: will pause the code execution until storage retrieval completes (it will make data hold the retrieved values)
+// ...get() will return a promise, will resolve once the data retrieval is complete
+//  will return the object containing requested storage data
 async function getNotes() {
-  // retrieve existing notes from Chrome storage
-  // storage API requires that data be stored and retrieved as an object
-  // chrome.storage.sync.get:
-  //  -async method for getting data from Chrome sync storage
-  //  -parameter/arg: key(s): object with key(s) to retrieve ({positiveNotes: []})
-  //  []-> defaults to empty array if no key/value pairs exist
-
-  // await: will pause the code execution until storage retrieval completes (it will make data hold the retrieved values)
-  // ...get() will return a promise, will resolve once the data retrieval is complete
-  //  will return the object containing requested storage data
   const data = await chrome.storage.sync.get({ positiveNotes: [] });
   return data.positiveNotes;
 }
