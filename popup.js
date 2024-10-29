@@ -93,18 +93,19 @@ async function displayNotes() {
     noteContent.textContent = note;
     noteDiv.appendChild(noteContent);
 
+    // edit note button
+    const editBtn = document.createElement('button');
+    editBtn.textContent = 'Edit';
+    // onclick -> execute edit function
+    editBtn.onclick = editNote(index);
+    noteDiv.appendChild(editBtn);
+
+    notesContainer.appendChild(noteDiv);
     // delete note button
     const deleteBtn = document.createElement('button');
     deleteBtn.textContent = 'Delete';
     // onclick -> execute delete function
     noteDiv.appendChild(deleteBtn);
-    // edit note button
-    const editBtn = document.createElement('button');
-    editBtn.textContent = 'Edit';
-    // onclick -> execute edit function
-    noteDiv.appendChild(editBtn);
-
-    notesContainer.appendChild(noteDiv);
   });
 }
 // toggle display function
@@ -117,10 +118,20 @@ function toggleAllNotesDisplay() {
   }
 }
 
+// create function to edit the notes
+async function editNote(index) {
+  const positiveNotes = await getNotes();
+  const editedNote = prompt(`Edit your note: ${positiveNotes[index]}`);
+  if (!editedNote) {
+    positiveNotes[index] = editedNote;
+    await chrome.storage.sync.set({ positiveNotes });
+    displayNotes();
+  }
+}
+
 // create a separate function to get positiveNotes (refactor)[x]
 // create function to delete note
 // create function to display notes
-// create function to edit the notes
 
 document
   .getElementById('quoteButton')
