@@ -42,10 +42,8 @@ async function saveNote() {
   // await: will pause the code execution until storage retrieval completes (it will make data hold the retrieved values)
   // ...get() will return a promise, will resolve once the data retrieval is complete
   //  will return the object containing requested storage data
-  const data = await chrome.storage.sync.get({ positiveNotes: [] });
-  console.log(data);
+  const positiveNotes = await getNotes();
 
-  const positiveNotes = data.positiveNotes;
   positiveNotes.push(note);
   // console.log(positiveNotes);
 
@@ -57,8 +55,7 @@ async function saveNote() {
 
 // users can retrieve these happy reminders/notes by clicking a button
 async function retrieveNote() {
-  const data = await chrome.storage.sync.get({ positiveNotes: [] });
-  const positiveNotes = data.positiveNotes;
+  const positiveNotes = await getNotes();
 
   // check if this array is empty, if not we will pick a random note and display it on screen
   if (positiveNotes.length > 0) {
@@ -70,8 +67,55 @@ async function retrieveNote() {
   }
 }
 
+async function getNotes() {
+  const data = await chrome.storage.sync.get({ positiveNotes: [] });
+  return data.positiveNotes;
+}
+
+// create function to display notes
+async function displayNotes() {
+  const positiveNotes = await getNotes();
+  const notesContainer = document.getElementById('allNotesContainer');
+
+  // clear previous content
+  notesContainer.innerHTML = '';
+
+  // once this function executes we reassign the display to 'block' from 'none'
+  notesContainer.style.display = 'block';
+
+  // loop over all saved notes and append each note HTML element to the container
+  positiveNotes.forEach((note, index) => {
+    const noteDiv = document.createElement('div');
+    noteDiv.classList.add('note-ele');
+
+    // Note content
+    const noteContent = document.createElement('div');
+    noteContent.textContent = note;
+    noteDiv.appendChild(noteContent);
+
+    notesContainer.appendChild(noteDiv);
+  });
+}
+// toggle display function
+function toggleAllNotesDisplay() {
+  const notesContainer = document.getElementById('allNotesContainer');
+  if (notesContainer.style.display === 'none') {
+    displayNotes();
+  } else {
+    notesContainer.style.display = 'none';
+  }
+}
+
+// create a separate function to get positiveNotes (refactor)[x]
+// create function to delete note
+// create function to display notes
+// create function to edit the notes
+
 document
   .getElementById('quoteButton')
   .addEventListener('click', fetchRandomQuote);
 document.getElementById('saveNoteBtn').addEventListener('click', saveNote);
 document.getElementById('retrieveBtn').addEventListener('click', retrieveNote);
+document
+  .getElementById('retrieveAllBtn')
+  .addEventListener('click', toggleAllNotesDisplay);
