@@ -18,6 +18,7 @@ function fetchRandomQuote() {
     })
     .then((data) => {
       const quoteHTML = data[0].h;
+      quoteDisplay.style.display = 'block';
       // console.log(quoteHTML);
       // innerHTML will directly insert our pre-formatted HTML into the DOM
       document.getElementById('quoteDisplay').innerHTML = quoteHTML;
@@ -52,14 +53,17 @@ async function saveNote() {
 // users can retrieve these happy reminders/notes by clicking a button
 async function retrieveNote() {
   const positiveNotes = await getNotes();
+  const quoteDisplay = document.getElementById('quoteDisplay');
 
   // check if this array is empty, if not we will pick a random note and display it on screen
   if (positiveNotes.length > 0) {
     const randomNote =
       positiveNotes[Math.floor(Math.random() * positiveNotes.length)];
-    document.getElementById('displayNote').innerText = randomNote;
+    quoteDisplay.innerHTML = `<blockquote>&ldquo;${randomNote}&rdquo;</blockquote>`;
+    quoteDisplay.style.display = 'block';
   } else {
-    document.getElementById('displayNote').innerText = `No notes found!`;
+    quoteDisplay.innerText = `No notes found!`;
+    quoteDisplay.style.display = 'block';
   }
 }
 
@@ -176,6 +180,7 @@ async function deleteNote(index) {
 // - reformat code possibly to make it DRYer?
 // - possibly implement random dog photo generator?
 // - refactor the fetch call to use async/await
+// refactor so we can edit directly inside text area instead?
 
 document
   .getElementById('quoteButton')

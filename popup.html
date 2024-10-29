@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happiness Jar</title>
@@ -10,20 +14,21 @@
     <div id="container">
       <h2>Happiness Jar</h2>
 
+      <div id="displayNote"></div>
+
       <!--Inspirational Quote Section-->
       <button id="quoteButton">Get an Inspirational Quote</button>
       <div id="quoteDisplay"></div>
 
+      <!--Display Saved Note Section-->
+      <button id="retrieveBtn">Retrieve a Happy Reminder!</button>
+
       <!--Positive Note Section-->
       <textarea
         id="positiveNote"
-        placeholder="Write a positive reminder for today!"
+        placeholder="Write a positive reminder for today! 🌞"
       ></textarea>
       <button id="saveNoteBtn">Save Note</button>
-
-      <!--Display Saved Note Section-->
-      <button id="retrieveBtn">Retrieve Happiness</button>
-      <div id="displayNote"></div>
 
       <!--Display All Notes Section-->
       <button id="retrieveAllBtn">Retrieve All Notes</button>
