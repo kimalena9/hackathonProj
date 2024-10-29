@@ -18,6 +18,7 @@ function fetchRandomQuote() {
     })
     .then((data) => {
       const quoteHTML = data[0].h;
+      quoteDisplay.style.display = 'block';
       // console.log(quoteHTML);
       // innerHTML will directly insert our pre-formatted HTML into the DOM
       document.getElementById('quoteDisplay').innerHTML = quoteHTML;
@@ -52,28 +53,30 @@ async function saveNote() {
 // users can retrieve these happy reminders/notes by clicking a button
 async function retrieveNote() {
   const positiveNotes = await getNotes();
+  const quoteDisplay = document.getElementById('quoteDisplay');
 
   // check if this array is empty, if not we will pick a random note and display it on screen
   if (positiveNotes.length > 0) {
     const randomNote =
       positiveNotes[Math.floor(Math.random() * positiveNotes.length)];
-    document.getElementById('displayNote').innerText = randomNote;
+    quoteDisplay.innerHTML = `<blockquote>&ldquo;${randomNote}&rdquo;</blockquote>`;
+    quoteDisplay.style.display = 'block';
   } else {
-    document.getElementById('displayNote').innerText = `No notes found!`;
+    quoteDisplay.innerText = `No notes found!`;
+    quoteDisplay.style.display = 'block';
   }
 }
+// retrieve existing notes from Chrome storage
+// storage API requires that data be stored and retrieved as an object
+// chrome.storage.sync.get:
+//  -async method for getting data from Chrome sync storage
+//  -parameter/arg: key(s): object with key(s) to retrieve ({positiveNotes: []})
+//  []-> defaults to empty array if no key/value pairs exist
 
+// await: will pause the code execution until storage retrieval completes (it will make data hold the retrieved values)
+// ...get() will return a promise, will resolve once the data retrieval is complete
+//  will return the object containing requested storage data
 async function getNotes() {
-  // retrieve existing notes from Chrome storage
-  // storage API requires that data be stored and retrieved as an object
-  // chrome.storage.sync.get:
-  //  -async method for getting data from Chrome sync storage
-  //  -parameter/arg: key(s): object with key(s) to retrieve ({positiveNotes: []})
-  //  []-> defaults to empty array if no key/value pairs exist
-
-  // await: will pause the code execution until storage retrieval completes (it will make data hold the retrieved values)
-  // ...get() will return a promise, will resolve once the data retrieval is complete
-  //  will return the object containing requested storage data
   const data = await chrome.storage.sync.get({ positiveNotes: [] });
   return data.positiveNotes;
 }
@@ -176,6 +179,7 @@ async function deleteNote(index) {
 // - reformat code possibly to make it DRYer?
 // - possibly implement random dog photo generator?
 // - refactor the fetch call to use async/await
+// refactor so we can edit directly inside text area instead?
 
 document
   .getElementById('quoteButton')
