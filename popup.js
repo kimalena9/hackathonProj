@@ -96,15 +96,16 @@ async function displayNotes() {
     // edit note button
     const editBtn = document.createElement('button');
     editBtn.textContent = 'Edit';
-    // onclick -> execute edit function
-    editBtn.onclick = editNote(index);
+    //1. the anonymous function will wrap it and store reference to the index value specific to that edit button on each iteration using closure 2. it will also make sure the function doesnt execute immediately
+    editBtn.addEventListener('click', () => editNote(index));
+
     noteDiv.appendChild(editBtn);
 
     notesContainer.appendChild(noteDiv);
     // delete note button
     const deleteBtn = document.createElement('button');
     deleteBtn.textContent = 'Delete';
-    // onclick -> execute delete function
+    // on click -> execute delete function
     noteDiv.appendChild(deleteBtn);
   });
 }
@@ -122,7 +123,7 @@ function toggleAllNotesDisplay() {
 async function editNote(index) {
   const positiveNotes = await getNotes();
   const editedNote = prompt(`Edit your note: ${positiveNotes[index]}`);
-  if (!editedNote) {
+  if (editedNote !== null) {
     positiveNotes[index] = editedNote;
     await chrome.storage.sync.set({ positiveNotes });
     displayNotes();
