@@ -93,6 +93,17 @@ async function displayNotes() {
     noteContent.textContent = note;
     noteDiv.appendChild(noteContent);
 
+    // delete note button
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = 'Delete';
+    // onclick -> execute delete function
+    noteDiv.appendChild(deleteBtn);
+    // edit note button
+    const editBtn = document.createElement('button');
+    editBtn.textContent = 'Edit';
+    // onclick -> execute edit function
+    noteDiv.appendChild(editBtn);
+
     notesContainer.appendChild(noteDiv);
   });
 }
